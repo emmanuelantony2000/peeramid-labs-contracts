@@ -6,12 +6,14 @@ const func: DeployFunction = async (hre: HardhatRuntimeEnvironment) => {
 
   const { deployer, owner } = await getNamedAccounts();
   const tokenArtifact = await deployments.getArtifact('Rankify');
-  await deploy('Rankify', {
+  const result = await deploy('Rankify', {
     contract: tokenArtifact,
     from: deployer,
     args: [owner],
     skipIfAlreadyDeployed: true,
   });
+
+  console.log(`Deployed Rankify to: ${result.address}`);
 };
 
 export default func;

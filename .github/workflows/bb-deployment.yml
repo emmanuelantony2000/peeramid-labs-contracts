@@ -15,31 +15,32 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Install Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16'
-
       - name: Install pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
         with:
-          version: 8
+          run_install: false
+          version: 9
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
 
       - name: Install dependencies
         run: pnpm install
 
+      - name: Compile contracts
+        run: pnpm hardhat compile
+
       - name: bb_action_ci
         uses: BuildBearLabs/buildbear_x_action@v1.3.0
-        with: 
+        with:
           network: |
             [
               {
-                "chainId": 59141
-              },
-              {
-                "chainId": 1,
-                "blockNumber": 10000
+                "chainId": 1
               }
             ]
-          deploy-command: "bash playbook/utils/deploy-to-buildbear.sh"
-          buildbear-token: "BB"
+          deploy-command: 'bash playbook/utils/deploy-to-buildbear.sh'
+          buildbear-token: 'BB'

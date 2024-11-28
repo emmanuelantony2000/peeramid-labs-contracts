@@ -98,6 +98,7 @@ export default {
     deployer: {
       hardhat: '0xF52E5dF676f51E410c456CC34360cA6F27959420',
       anvil: '0x6Cf8d74C7875de8C2FfB09228F4bf2A21b25e583',
+      buildbear: '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266',
       default: '0xF52E5dF676f51E410c456CC34360cA6F27959420', //TODO this must be set for networks
     },
     owner: {
@@ -119,15 +120,15 @@ export default {
   },
   defaultNetwork: 'hardhat',
   networks: {
-    hardhat: {
-      accounts: {
-        mnemonic: 'casual vacant letter raw trend tool vacant opera buzz jaguar bridge myself',
-      }, // ONLY LOCAL
-      forking: {
-        url: process.env.FORK_RPC_URL ?? '',
-        blockNumber: 257223284, // works for arbitrum, change for others
-      },
-    },
+    // hardhat: {
+    //   accounts: {
+    //     mnemonic: 'casual vacant letter raw trend tool vacant opera buzz jaguar bridge myself',
+    //   }, // ONLY LOCAL
+    //   forking: {
+    //     url: process.env.FORK_RPC_URL ?? '',
+    //     blockNumber: 257223284, // works for arbitrum, change for others
+    //   },
+    // },
     mumbai: {
       url: 'https://matic-mumbai.chainstacklabs.com',
       accounts: process.env.PRIVATE_KEY && [process.env.PRIVATE_KEY],
@@ -154,7 +155,7 @@ export default {
       url: process.env.BUILDBEAR_RPC_URL ?? '',
       accounts: {
         mnemonic: process.env.MNEMONIC ?? 'x',
-      },// ON BuildBear
+      }, // ON BuildBear
     },
     anvil: {
       url: process.env.ANVIL_RPC_URL ?? '',
